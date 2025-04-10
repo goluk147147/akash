@@ -1,0 +1,38 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+
+# ALLOW ONLY NECESSARY REQUEST METHODS
+RewriteCond %{REQUEST_METHOD} !^(GET|POST) [NC]
+RewriteRule .* - [F,L]
+# Check if the Host header is not vapt.pb-online.co.in
+RewriteCond %{HTTP_HOST} !^www\.pb-online\.co\.in$ [NC]
+# If not, redirect to the correct host
+RewriteRule ^(.*)$ https://www.pb-online.co.in/$1 [R=301,L]
+# Extra Security Headers Protect against XSS attacks,page-framing and click-jacking,content-sniffing
+<IfModule mod_headers.c>
+        #Header set X-XSS-Protection "1; mode=block"
+        #Header always append X-Frame-Options SAMEORIGIN
+        #Header set X-Content-Type-Options nosniff
+#        Header Content-Type: text/html
+        #Header set Content-Security-Policy "img-src 'self' https://utkarsh-efs.s3.ap-south-1.amazonaws.com https://utkarsh-prod.s3.ap-south-1.amazonaws.com .googleusercontent.com; script-src 'self' .utkarshapp.com *.datatables.net 'unsafe-inline' 'unsafe-eval';frame-ancestors 'self';"
+        #Header set Referrer-Policy "no-referrer"
+        #Header set Feature-Policy "geolocation 'self'; vibrate 'none'"
+        #Header set Referrer-Policy "strict-origin-when-cross-origin"
+        Header set Strict-Transport-Security "max-age=1800; includeSubDomains; preload" env=HTTPS
+        Header always set X-Frame-Options "DENY"
+        Header always set X-Content-Type-Options "nosniff"
+        Header always set X-XSS-Protection "1; mode=block"
+        Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; img-src 'self'"
+</IfModule>
+
+Options -Indexes
+
+RewriteCond %{HTTP:X-Forwarded-SSL} on
+RewriteCond %{HTTPS} on
+<Files ~ "(.txt)">
+Order allow,deny
+Deny from all
+</Files>

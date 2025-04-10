@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDP Dummy Example</title>
+</head>
+<body>
+    <h1>Generate RDP Connection</h1>
+    <button id="generateRdpBtn">Generate RDP File</button>
+
+    <script>
+        // Function to generate the .rdp file
+        function generateRdpFile() {
+            const rdpConfig = `
+                screen mode id:i:2
+                use multimon:i:0
+                desktopwidth:i:1920
+                desktopheight:i:1080
+                session bpp:i:32
+                compression:i:1
+                keyboardhook:i:2
+                audiomode:i:0
+                redirectdrives:i:1
+                redirectprinters:i:1
+                redirectcomports:i:0
+                redirectsmartcards:i:0
+                password 51:b:<encrypted_password>
+                username:s:guest
+                domain:s:WORKGROUP
+                server:s:192.168.1.100`; // Dummy IP address for demonstration purposes
+
+            // Create a Blob object from the RDP configuration
+            const blob = new Blob([rdpConfig], { type: 'application/x-rdp' });
+            
+            // Create a download link for the RDP file
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'remote_connection.rdp'; // Name of the file to be downloaded
+            link.click(); // Trigger the download
+        }
+
+        // Attach event listener to the "Generate RDP File" button
+        document.getElementById('generateRdpBtn').addEventListener('click', generateRdpFile);
+    </script>
+</body>
+</html>

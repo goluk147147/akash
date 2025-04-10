@@ -1,0 +1,34 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/*
+  | -------------------------------------------------------------------------
+  | Hooks
+  | -------------------------------------------------------------------------
+  | This file lets you define "hooks" to extend CI without hacking the core
+  | files.  Please see the user guide for info:
+  |
+  |	https://codeigniter.com/user_guide/general/hooks.html
+  |
+ */
+$hook['pre_controller'] = array(
+    'class' => 'Check_login',
+    'function' => 'check_login',
+    'filename' => 'Check_login.php',
+    'filepath' => 'hooks'
+);
+
+// $hook['pre_controller'] = array(
+//   'class'    => 'UrlDetect',
+//   'function' => 'index',
+//   'filename' => 'UrlDetect.php',
+//   'filepath' => 'modules/web/hooks',
+// );
+
+// $hook['post_controller_constructor'][] = array(
+//   'class'    => '',
+//   'function' => 'load_session_library',
+//   'filename' => 'session_loader.php',
+//   'filepath' => 'hooks'
+// );

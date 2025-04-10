@@ -1,0 +1,76 @@
+<style>
+    .img-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    .list-unstyled {
+        margin-bottom: 0;
+    }
+
+    .list-unstyled li {
+        margin: 4px 0;
+    }
+
+    .int-searc-res {
+        width: 100% !important;
+        margin: 0;
+    }
+
+    .m-dialog {
+        width: 100% !important;
+        height: 100;
+        margin: 0 !important;
+        background: #000;
+    }
+
+    .sidenav {
+        background: linear-gradient(to bottom, #0A0A0A 80%, #0A0A0A 100%, #0A0A0A 100%);
+        width: 270px;
+        top: 49px;
+        right: -270px;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .toggle_navs {
+        right: 0px;
+    }
+
+    #search_page .close {
+
+        width: auto !important;
+    }
+
+    .search_all_shows_container {
+        display: none;
+    }
+
+    #search_page .modal-body {
+        height: 100vh !important;
+    }
+
+    .pb_wl_card {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .pb_card_vd-2 img {
+        width: 100%;
+    }
+
+    .text_ac {
+        color: #acacac;
+    }
+
+    .pb_wl_card .pb_card_details {
+        width: 16%;
+        margin-right: 7px;
+        transition: all 0.5s;
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .pb_wl_card .pb_card_details:hover {
+        z-index: 999;
+    }
+</style>

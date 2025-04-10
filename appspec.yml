@@ -1,0 +1,6 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/web_ott  # Adjust this path according to your PHP project structure
+file_exists_behavior: OVERWRITE

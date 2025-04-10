@@ -1,0 +1,31 @@
+RewriteEngine On
+RewriteCond % { REQUEST_FILENAME } !-f
+RewriteCond % { REQUEST_FILENAME } !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+
+# ALLOW ONLY NECESSARY REQUEST METHODS
+RewriteCond % { REQUEST_METHOD } !^(GET | POST) [NC]
+RewriteRule .* - [F, L]
+
+# Extra Security Headers Protect against XSS attacks,page-framing and click-jacking,content-sniffing
+<IfModule mod_headers.c>
+# Header edit Set-Cookie "^([^;]*)(;.*)$" "$1;SameSite=Lax;Secure$2"
+# Header edit Set-Cookie "^(_pk_cvar\.1\.1fff[^;]*)(;.*)$" "$1;SameSite=Lax;Secure$2"
+#     Header edit Set-Cookie "^(_pk_ses\.1\.1fff[^;]*)(;.*)$" "$1;SameSite=Lax;Secure$2"
+#Header set X-XSS-Protection "1; mode=block"
+#Header always append X-Frame-Options SAMEORIGIN
+#Header set X-Content-Type-Options nosniff
+#Header Content-Type: text/html
+#Header set Content-Security-Policy "img-src 'self' https://utkarsh-efs.s3.ap-south-1.amazonaws.com https://utkarsh-prod.s3.ap-south-1.amazonaws.com *.googleusercontent.com; script-src 'self' *.utkarshapp.com *.datatables.net 'unsafe-inline' 'unsafe-eval';frame-ancestors 'self';"
+#Header set Referrer-Policy "no-referrer"
+#Header set Feature-Policy "geolocation 'self'; vibrate 'none'"
+#Header set Referrer-Policy "strict-origin-when-cross-origin"
+Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+#Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+Options -Indexes
+
+RewriteCond % { HTTP:X-Forwarded-SSL } on
+RewriteCond % { HTTPS } on
